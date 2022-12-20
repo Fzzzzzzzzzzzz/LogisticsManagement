@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenzhi.mapper.SysCargoMapper">
+
+    <resultMap id="BaseResultMap" type="com.chenzhi.domain.entity.SysCargo">
+            <id property="cargoId" column="cargo_id" jdbcType="BIGINT"/>
+            <result property="goodsNames" column="goods_names" jdbcType="OTHER"/>
+            <result property="goodsPack" column="goods_pack" jdbcType="OTHER"/>
+            <result property="sendGoodsType" column="send_goods_type" jdbcType="OTHER"/>
+            <result property="returnSlip" column="return_slip" jdbcType="OTHER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cargo_id,goods_names,goods_pack,
+        send_goods_type,return_slip
+    </sql>
+</mapper>

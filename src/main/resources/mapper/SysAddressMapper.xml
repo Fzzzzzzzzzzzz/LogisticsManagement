@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenzhi.mapper.SysAddressMapper">
+
+    <resultMap id="BaseResultMap" type="com.chenzhi.domain.entity.SysAddress">
+            <id property="addressId" column="address_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="myname" column="myname" jdbcType="VARCHAR"/>
+            <result property="detailedAddress" column="detailed_address" jdbcType="VARCHAR"/>
+            <result property="phoneNumber" column="phone_number" jdbcType="CHAR"/>
+            <result property="code" column="code" jdbcType="CHAR"/>
+            <result property="collectOrsend" column="collect_orsend" jdbcType="INTEGER"/>
+            <result property="isDefault" column="is_default" jdbcType="TINYINT"/>
+            <result property="city" column="city" jdbcType="VARCHAR"/>
+            <result property="province" column="province" jdbcType="VARCHAR"/>
+            <result property="region" column="region" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        address_id,user_id,myname,
+        detailed_address,phone_number,code,
+        collect_orsend,is_default,city,
+        province,region
+    </sql>
+</mapper>
