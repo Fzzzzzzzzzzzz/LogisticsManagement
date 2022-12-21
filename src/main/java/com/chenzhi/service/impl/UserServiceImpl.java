@@ -95,7 +95,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
         SysUser sysUser = new SysUser();
         sysUser.setUserName(userRegistration.getUserName());
         sysUser.setNickName(userRegistration.getNickName());
-        sysUser.setPassword(userRegistration.getPassword());
+        sysUser.setPassword("{noop}"+userRegistration.getPassword());
         sysUser.setAvatar("http://rmvft83aq.hn-bkt.clouddn.com/99d276f8-d98b-41fa-ab40-acc2420b2b3e");
         userMapper.insert(sysUser);
         return Result.success(200,"用户注册成功",null);
