@@ -29,6 +29,21 @@ public class SysAddressServiceImpl extends ServiceImpl<SysAddressMapper, SysAddr
     //新增地址薄
     @Override
     public Result addAddress(SysAddress sysAddress) {
+        //再新增地址薄之前判断是否设置新的地址薄为默认的地址薄
+        //如果是默认地址,先对数据库里面的数据进行更改
+        if(sysAddress.getIsDefault()==1){
+            List<SysAddress> sysAddressList = sysAddressMapper.selectList(
+                            new LambdaQueryWrapper<SysAddress>()
+                            .eq(SysAddress::getUserId, sysAddress.getUserId())
+                            .eq(SysAddress::getIsDefault, 1)
+                            .eq(SysAddress::getCollectOrsend,sysAddress.getCollectOrsend())
+                        );
+            //2.1找出默认地址将其改为非默认地址
+            for (SysAddress sysAddressTemp: sysAddressList) {
+                sysAddressTemp.setIsDefault(0);
+                sysAddressMapper.updateById(sysAddressTemp);
+            }
+        }
         int insert = sysAddressMapper.insert(sysAddress);
         if (insert>0)
             return Result.success(200,"新增地址薄成功！",null);
