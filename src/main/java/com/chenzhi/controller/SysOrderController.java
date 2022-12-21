@@ -34,7 +34,10 @@ public class SysOrderController {
      *新增订单
      */
     @PostMapping("addOrder")
-    public Result addOrder(SysOrder sysOrder){
+    public Result addOrder(@RequestBody SysOrder sysOrder,
+                           HttpServletRequest request){
+        Long userId = GetLoginUser.getLoginUserNameInSession(request).getUserId();
+        sysOrder.setUserId(userId);
         //对象需要校验，暂时不管
         if(!ObjectUtils.isEmpty(sysOrder)){
             return sysOrderService.addOrder(sysOrder);

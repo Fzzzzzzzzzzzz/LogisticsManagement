@@ -2,6 +2,7 @@ package com.chenzhi.controller;
 
 import com.chenzhi.common.utils.GetLoginUser;
 import com.chenzhi.common.utils.Result;
+import com.chenzhi.domain.dto.LoginUser;
 import com.chenzhi.domain.entity.SysAddress;
 import com.chenzhi.service.impl.SysAddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,10 @@ public class SysAddressController {
      * 新增地址薄
      */
     @PostMapping("/addAddress")
-    public Result addAddress(SysAddress sysAddress){
+    public Result addAddress(@RequestBody SysAddress sysAddress,
+                             HttpServletRequest request){
+        Long userId = GetLoginUser.getLoginUserNameInSession(request).getUserId();
+        sysAddress.setUserId(userId);
         //对象需要校验，暂时不管
         if(!ObjectUtils.isEmpty(sysAddress)){
             return sysAddressService.addAddress(sysAddress);
@@ -41,10 +45,13 @@ public class SysAddressController {
      * 更新地址薄
      */
     @PutMapping("/updateAddress")
-    public Result updateAddress(SysAddress sysAddress){
+    public Result updateAddress(@RequestBody SysAddress sysAddress,
+                                HttpServletRequest request){
         if (sysAddress.getAddressId()==null){
             return Result.fail(400,"address_Id为空！",null);
         }
+        Long userId = GetLoginUser.getLoginUserNameInSession(request).getUserId();
+        sysAddress.setUserId(userId);
         //对象需要校验，暂时不管
         if(!ObjectUtils.isEmpty(sysAddress)){
             return sysAddressService.updateAddress(sysAddress);
